@@ -3,10 +3,7 @@ package ru.skillbranch.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.extension.TimeUnits
-import ru.skillbranch.devintensive.extension.add
-import ru.skillbranch.devintensive.extension.format
-import ru.skillbranch.devintensive.extension.touserView
+import ru.skillbranch.devintensive.extension.*
 import ru.skillbranch.devintensive.models.*
 import java.util.*
 
@@ -61,7 +58,7 @@ class ExampleUnitTest {
         val user = User.makeUser("John Wick")
         val user2 = user.copy(lastVisit = Date().add(-2, TimeUnits.MINUTE))
         val user3 = user.copy(id = "2", lastVisit = Date().add(2, TimeUnits.HOUR))
-        val user4 = user.copy(lastName = "Cena" ,lastVisit = Date().add(-2, TimeUnits.DAY))
+        val user4 = user.copy(lastName = "Cena", lastVisit = Date().add(-2, TimeUnits.DAY))
 
 
         println(
@@ -81,7 +78,7 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun test_data_maping(){
+    fun test_data_maping() {
         val user = User.makeUser("Георгий Бильмович")
         val newUser = user.copy(lastVisit = Date().add(-3, TimeUnits.DAY))
 
@@ -101,6 +98,15 @@ class ExampleUnitTest {
 
         println(txtMessage.formatMessage())
         println(imgMessage.formatMessage())
-        }
     }
+
+
+    @Test
+    fun test_truncate(){
+        val str = "123456789101112415 ".truncate(3)
+        println(str)
+    }
+
+
+}
 

@@ -27,3 +27,23 @@ fun User.touserView() : UserView {
 }
 
 
+@UseExperimental(ExperimentalStdlibApi::class)
+fun String.truncate(count : Int = 16) :String{
+    var result = ""
+    val str = this.toCharArray(0,count)
+
+    for ((index, char) in str.withIndex()) {
+        if (index == count-1 && char.equals(' ')) {
+            result += "..."
+            return result
+        }else
+        result += char
+
+    }
+    result += "..."
+
+    return result
+
+}
+
+
