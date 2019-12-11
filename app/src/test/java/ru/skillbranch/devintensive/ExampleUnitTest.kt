@@ -88,9 +88,16 @@ class ExampleUnitTest {
         userView.printMe()
     }
 
+    //home task  parseFullName
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Георгий Бильмович")
+        val user2 = User.makeUser("")
+        val user3 = User.makeUser(" ")
+        val user4 = User.makeUser("John")
+        val user5 = User.makeUser(null)
+
+
         val txtMessage =
             BaseMessage.makeMessage(user, Chat("0"), payload = "text message", type = "text")
         val imgMessage =
@@ -100,6 +107,20 @@ class ExampleUnitTest {
         println(imgMessage.formatMessage())
     }
 
+    // home task Date.format
+    // home task Date.add
+    @Test
+    fun test_date(){
+
+        println("""
+            ${Date().format()}
+            ${Date().format("HH:mm")}
+            
+            ${Date().add(2, TimeUnits.SECOND) }
+            ${Date().add(-4, TimeUnits.DAY)}
+        """.trimIndent())
+
+    }
 
 //    @Test
 //    fun test_truncate(){

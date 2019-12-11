@@ -13,7 +13,7 @@ const val DAY = 24 * HOUR
 
 fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String{
     val  dateFormat = SimpleDateFormat(pattern,Locale("ru"))
-    return dateFormat.format(this)
+        return dateFormat.format(this)
 }
 fun Date.humanizeDiff(date: Date = Date()): String {
 
