@@ -101,11 +101,11 @@ class ExampleUnitTest {
     }
 
 
-    @Test
-    fun test_truncate(){
-        val str = "123456789101112415 ".truncate(3)
-        println(str)
-    }
+//    @Test
+//    fun test_truncate(){
+//        val str = "123456789101112415 ".truncate(3)
+//        println(str)
+//    }
 
 
 }
