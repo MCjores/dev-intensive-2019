@@ -2,7 +2,7 @@ package ru.skillbranch.devintensive.Utils
 
 object Utils {  // Можем обратиться из любой части кода
     fun parseFullName(fullName: String?): Pair<String?, String?> {
-        //TODO FIX ME
+        
         val parts : List<String>? = fullName?.split(" ")
 
         var firstName = parts?.getOrNull(0)
