@@ -52,7 +52,7 @@ enum class Question(val question: String, val answer: List<String>) {
     NAME("Как меня зовут?", listOf("бендер", "bender")) {
         override fun nextQuestion(): Question = PROFESSION
     },
-    PROFESSION("Назови мою профессию", listOf("сгобальщик", "bender")) {
+    PROFESSION("Назови мою профессию?", listOf("сгобальщик", "bender")) {
         override fun nextQuestion(): Question = MATERIAL
     },
     MATERIAL("из чего я сделан?", listOf("металл", "дерево", "iron", "wood")) {
