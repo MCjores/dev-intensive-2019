@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
-        sendBtn = iv_send_btn
+        sendBtn = iv_send
 
 
 
@@ -93,7 +91,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
     override fun onClick(v: View?) {
-        if (v?.id== R.id.iv_send_btn){
+        if (v?.id == R.id.iv_send){
             val (phrase,color)  =  benderObj.listenAnser(messageEt.text.toString().toLowerCase())
             messageEt.setText("")
             val(r,g,b) = color

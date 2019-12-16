@@ -20,7 +20,9 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         } else {
             if (status==Status.CRITICAL) {
                 status = status.nextStatus()
+                question = Question.NAME
                 "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+
             } else {
                 status = status.nextStatus()
                 "Это неправильный ответ\n${question.question}" to status.color
@@ -62,7 +64,7 @@ enum class Question(val question: String, val answer: List<String>) {
     SERIAL("мой серийный номер?", listOf("2716057")) {
         override fun nextQuestion(): Question = IDLE
     },
-    IDLE("Отлично - ты справился\nНа этом все, вопросов больше нет", listOf()) {
+    IDLE("На этом все, вопросов больше нет", listOf()) {
         override fun nextQuestion(): Question = IDLE
     };
 
