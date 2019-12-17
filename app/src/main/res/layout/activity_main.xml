@@ -41,7 +41,8 @@
         android:layout_weight="1"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-
+        android:inputType="text"
+        android:imeOptions="actionDone"
         android:hint="ВВедите текст"
         android:lines="1"
         android:padding="@dimen/spacing_normal_16"

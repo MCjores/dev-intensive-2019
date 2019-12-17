@@ -5,14 +5,17 @@ import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.skillbranch.devintensive.extension.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEditorActionListener {
 
     lateinit var benderImage: ImageView
     lateinit var textTxt: TextView
@@ -45,6 +48,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
+        messageEt.setOnEditorActionListener(this)
+
     }
 
     override fun onRestart() {
@@ -92,11 +97,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
     override fun onClick(v: View?) {
         if (v?.id == R.id.iv_send){
-            val (phrase,color)  =  benderObj.listenAnser(messageEt.text.toString().toLowerCase())
-            messageEt.setText("")
-            val(r,g,b) = color
-            benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
-            textTxt.text = phrase
+            sendMsgToBender()
+            this.hideKeyboard()
         }
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        if (actionId== EditorInfo.IME_ACTION_DONE) {
+            sendMsgToBender()
+            this.hideKeyboard()
+//            return true
+        }
+        return false
+    }
+
+    private fun sendMsgToBender(){
+        val (phrase,color)  =  benderObj.listenAnser(messageEt.text.toString().toLowerCase())
+        messageEt.setText("")
+        val(r,g,b) = color
+        benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
+        textTxt.text = phrase
     }
 }
