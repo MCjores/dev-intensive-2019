@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.models
 
+import ru.skillbranch.devintensive.Utils.Utils
+
 data class Profile(
     val firstName: String,
     val lastName: String,
@@ -23,4 +25,10 @@ data class Profile(
         "respect" to respect
     )
 
+    fun nickName() : String {
+        var nickName = Utils.transliteration("$firstName $lastName")
+        return nickName
+
     }
+
+}

@@ -17,6 +17,7 @@ object PreferecesRepository {
     private const val RESPEC = "RESPEC"
     private const val APP_THEME = "APP_THEME"
 
+
     private val prefs: SharedPreferences by lazy {
         val ctx = App.applicationContext()
         PreferenceManager.getDefaultSharedPreferences(ctx)
@@ -61,6 +62,8 @@ object PreferecesRepository {
             is Float -> putFloat(key, value)
             else -> error("Only primitives types can be stored in Shared Preferences")
         }
+
+
 
         apply()
 

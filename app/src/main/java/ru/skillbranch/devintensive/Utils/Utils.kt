@@ -49,7 +49,7 @@ object Utils {  // Можем обратиться из любой части к
                     'р' ->result+= 'r'
                     'Ч' ->result+= "Ch"
                     'ч' ->result+= "ch"
-                    ' ' ->result+= devider
+                    ' ' ->result+= "_"
                 }
             }
         return result

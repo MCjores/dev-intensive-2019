@@ -1,26 +1,20 @@
 package ru.skillbranch.devintensive.ui.profile
 
-import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.extension.hideKeyboard
-import ru.skillbranch.devintensive.models.Bender
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
@@ -34,6 +28,9 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     lateinit var viewFields: Map<String, TextView>
+    val myValidException : String = "enterprise features topics collections trending events marketplace pricing " +
+            "nonprofit customer-stories customer-stories login join"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +76,8 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun initViews(savedInstanceState: Bundle?) {
         viewFields = mapOf(
             "nickname" to tv_nick_name,
@@ -91,8 +90,11 @@ class ProfileActivity : AppCompatActivity() {
             "respect" to tv_respect
         )
 
+
+
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
+
 
 
         btn_edit.setOnClickListener(View.OnClickListener {
@@ -106,7 +108,58 @@ class ProfileActivity : AppCompatActivity() {
             Log.d("M_ProfileActivity","btn_switch_click")
             viewModel.switchTheme()
         }
+
+        et_repository.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                Log.d("M_ProfileActivity","textChange = $s")
+
+                if (!isValidRepo(s) ) {
+                    Log.d("M_ProfileActivity","textChange if = $s")
+                    wr_repository.error = "Невалидный адрес репозитория"
+                } else wr_repository.error = ""
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+    })
+
+
+
+        }
+    private fun isValidRepo( text: Editable?): Boolean {
+        val domain1 = "https://www.github.com/"
+        val domain2 = "www.github.com/"
+        val domain3 = "github.com/"
+
+//        if (text?.split(domain1) == null )
+        val name1 = text?.split(domain1)?.toTypedArray()
+        val name2 = text?.split(domain2)?.toTypedArray()
+        val name3 = text?.split(domain3)?.toTypedArray()
+
+
+
+        Log.d("M_ProfileActivity","name1 = $name1 name2 = $name2 name3 = ${name3?.size} text = $text")
+
+        var nameRepo :String = " "
+        when{
+
+            name1?.size!! >1 -> nameRepo = name1[1]
+            name2?.size!! >1 -> nameRepo = name2[1]
+            name3?.size!! >1 -> nameRepo = name3[1]
+
+        }
+
+        Log.d("M_ProfileActivity","nameRepo = $nameRepo")
+        return nameRepo != " "
+
     }
+
+
 
     private fun showCurrentMode(isEdit: Boolean) {
         val info = viewFields.filter {
@@ -148,7 +201,21 @@ class ProfileActivity : AppCompatActivity() {
             setImageDrawable(icon)
         }
     }
+
+
+
+
+
 }
+
+private operator fun CharSequence?.invoke(s: String) {
+
+}
+
+
+
+
+
 
 
 
